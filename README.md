@@ -14,19 +14,19 @@ The main reason that this project was created, is that to be able to mimic the e
 
 The goals of this project:
 
-* An easy way to start (or to migrate) a project with Maven-Tycho with 3rd party libs with the following benefits:
-* Be usable from the IDE as well as from terminal.
-* Fully configured testing with unit and functional/gui testing.
-* Easy integration with CI (Travis.).
-* Update-site.
+│ An easy way to start (or to migrate) a project with Maven-Tycho with 3rd party libs with the following benefits:
+│ Be usable from the IDE as well as from terminal.
+│ Fully configured testing with unit and functional/gui testing.
+│ Easy integration with CI (Travis).
+│ Update-site.
 
 The initial structure of the project is closely following the [vogella][vogella link] example project structure, but without a product project. Using the feature level is sufficient for eclipse plugins for publishing them on update sites.
 
 ## Requirements
 
-* Apache Maven (reasonably new, 3.5.2 was on the dev machine).
-* Tycho 1.3.0
-* Eclipse NEON 3 (4.6.3) was used to generate the related projects.
+│ Apache Maven (reasonably new, 3.5.2 was on the dev machine).
+│ Tycho 1.3.0
+│ Eclipse NEON 3 (4.6.3) was used to generate the related projects.
 
 ## Build
 
@@ -38,54 +38,58 @@ type the following at the root of the project
 
 There is a brief explanation for every major part of the project
 
-```bash
+```
 
 .
-├── bundles                             /* In the bundles directory lie
-│   ├── example.plugin1                  * the plugins. The plugins are 
-│   │   ├── bin                          * smallest coherent unit in the 
-│   │   │   └── example                  * eclipse universe. */
+├── bundles                              │ In the bundles directory lie
+│   ├── example.plugin1                  │ the plugins. The plugins are
+│   │   ├── bin                          │ smallest coherent unit in the
+│   │   │   └── example                  │ eclipse universe.
 │   │   │       └── plugin1
 │   │   │           └── Activator.class
 │   │   ├── build.properties
 │   │   ├── .classpath
-│   │   ├── .gitignore
-│   │   ├── META-INF                    /* In pomless builds, the 
-│   │   │   └── MANIFEST.MF              * MANIFEST file regulates the
-│   │   ├── .project                     * maven build properties. */
+│   │   ├── META-INF                     │ In pomless builds, the
+│   │   │   └── MANIFEST.MF              │ MANIFEST file regulates the
+│   │   ├── .project                     │ maven build properties.
 │   │   ├── .settings
 │   │   │   └── org.eclipse.jdt.core.prefs
 │   │   └── src
 │   │       └── example
 │   │           └── plugin1
 │   │               └── Activator.java
-│   └── pom.xml                         /* only in the bundles folder */
+│   └── pom.xml                          │ pom only in the bundles folder
 │
 │
-├── features                            /* features are the smallest
-│   ├── example.feature                  * deployable units, consiting
-│   │   ├── build.properties             * of plugins. 
-│   │   ├── feature.xml                  * Features are also pomless. */
+├── features                             │ features are the smallest deployable
+│   ├── example.feature                  │ units, consisting of plugins.
+│   │   ├── build.properties
+│   │   ├── feature.xml                  │ Features are also pomless.
 │   │   └── .project
-│   └── pom.xml                         /* only in the root fetures */
+│   └── pom.xml                          │ Pom file only in the root features.
 │
-├── .mvn                                /* pomless  build setup gets
-│   └── extensions.xml                   * specified here. */
+├── .mvn                                 │ pomless  build setup gets
+│   └── extensions.xml                   │ specified here.
 │
-├── pom.xml                             /* There is a root project, with
-├── .project                             * a root pom file. */
+├── pom.xml                              │ There is a root project, with
+├── .project                             │ a root pom file.
 ├── README.md
-└── releng                              /* The build config project, and
-    └── example.configuration            * its pom lives here. */
-        ├── pom.xml
-        └── .project
+└── releng                               │ The build config project, and
+    └── example.configuration            │ its pom lives here.
+    │   ├── pom.xml
+    │   └── .project
+    ├── example.update                   │ The update site that publishes the
+    │   ├── category.xml                 │ that is configured to publish the
+    │   ├── pom.xml                      │ feature.
+    │   └── .project
+    └── pom.xml
 
 ```
 
 ## Useful links for better understanding the used concepts
 
-* [The Project structure][vogella link]
-* [The plugin that creates the local update site][mvn p2 link]
+│ [The Project structure][vogella link]
+│ [The plugin that creates the local update site][mvn p2 link]
 
 
 
