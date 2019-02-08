@@ -14,19 +14,19 @@ The main reason that this project was created, is that to be able to mimic the e
 
 The goals of this project:
 
-│ An easy way to start (or to migrate) a project with Maven-Tycho with 3rd party libs with the following benefits:
-│ Be usable from the IDE as well as from terminal.
-│ Fully configured testing with unit and functional/gui testing.
-│ Easy integration with CI (Travis).
-│ Update-site.
+* An easy way to start (or to migrate) a project with Maven-Tycho with 3rd party libs with the following benefits:
+* Be usable from the IDE as well as from terminal.
+* Fully configured testing with unit and functional/gui testing.
+* Easy integration with CI (Travis).
+* Update-site.
 
 The initial structure of the project is closely following the [vogella][vogella link] example project structure, but without a product project. Using the feature level is sufficient for eclipse plugins for publishing them on update sites.
 
 ## Requirements
 
-│ Apache Maven (reasonably new, 3.5.2 was on the dev machine).
-│ Tycho 1.3.0
-│ Eclipse NEON 3 (4.6.3) was used to generate the related projects.
+* Apache Maven (reasonably new, 3.5.2 was on the dev machine).
+* Tycho 1.3.0
+* Eclipse NEON 3 (4.6.3) was used to generate the related projects.
 
 ## Build
 
@@ -88,8 +88,8 @@ There is a brief explanation for every major part of the project
 
 ## Useful links for better understanding the used concepts
 
-│ [The Project structure][vogella link]
-│ [The plugin that creates the local update site][mvn p2 link]
+* [The Project structure][vogella link]
+* [The plugin that creates the local update site][mvn p2 link]
 
 
 
