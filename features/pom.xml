@@ -1,0 +1,17 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>example</groupId>
+    <artifactId>example.features</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>example</groupId>
+        <artifactId>example.root</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <modules>
+        <module>example.feature</module>
+    </modules>
+</project>
