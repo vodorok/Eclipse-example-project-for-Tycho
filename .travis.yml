@@ -10,5 +10,6 @@ before_script:
     - cd ./mavendeps
     - mvn p2:site
     - mvn jetty:run
+    - cd ..
 
 script: mvn clean verify

@@ -1,5 +1,7 @@
 # Eclipse example project for Tycho
 
+[![Build Status](https://travis-ci.org/Vodorok/Eclipse-example-project-for-Tycho.svg?branch=master)](https://travis-ci.org/Vodorok/Eclipse-example-project-for-Tycho)
+
 ## Preface 
 
 __This is a work in progress project, treat it accordingly, suggestions, contributions, and corrects are very welcome.__
@@ -61,15 +63,17 @@ There is a brief explanation for every major part of the project.
 -│   │       └── example
 -│   │           └── plugin1
 -│   │               └── Activator.java
-+│   └── pom.xml                          │ pom only in the bundles folder
++│   └── pom.xml                            │ pom only in the bundles folder
  │
+!├── mavendeps                              | 3rd party dependencies needed to
+!│   └── pom.xml                            | defined here.
  │
 +├── features                             │ features are the smallest deployable
 -│   ├── example.feature                  │ units, consisting of plugins.
 -│   │   ├── build.properties
 !│   │   ├── feature.xml                  │ Features are also pomless.
 -│   │   └── .project
-+   └── pom.xml                          │ Pom file only in the root features.
++   └── pom.xml                           │ Pom file only in the root features.
  │
 !├── .mvn                                 │ pomless  build setup gets
 !│   └── extensions.xml                   │ specified here.
