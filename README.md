@@ -36,53 +36,57 @@ type the following at the root of the project
 
 ## Folder Structure
 
-There is a brief explanation for every major part of the project
+There is a brief explanation for every major part of the project.
 
-```
+(Excuse for the makeshift diff style color coding.)
 
-.
-├── bundles                              │ In the bundles directory lie
-│   ├── example.plugin1                  │ the plugins. The plugins are
-│   │   ├── bin                          │ smallest coherent unit in the
-│   │   │   └── example                  │ eclipse universe.
-│   │   │       └── plugin1
-│   │   │           └── Activator.class
-│   │   ├── build.properties
-│   │   ├── .classpath
-│   │   ├── META-INF                     │ In pomless builds, the
-│   │   │   └── MANIFEST.MF              │ MANIFEST file regulates the
-│   │   ├── .project                     │ maven build properties.
-│   │   ├── .settings
-│   │   │   └── org.eclipse.jdt.core.prefs
-│   │   └── src
-│   │       └── example
-│   │           └── plugin1
-│   │               └── Activator.java
-│   └── pom.xml                          │ pom only in the bundles folder
-│
-│
-├── features                             │ features are the smallest deployable
-│   ├── example.feature                  │ units, consisting of plugins.
-│   │   ├── build.properties
-│   │   ├── feature.xml                  │ Features are also pomless.
-│   │   └── .project
-│   └── pom.xml                          │ Pom file only in the root features.
-│
-├── .mvn                                 │ pomless  build setup gets
-│   └── extensions.xml                   │ specified here.
-│
-├── pom.xml                              │ There is a root project, with
-├── .project                             │ a root pom file.
-├── README.md
-└── releng                               │ The build config project, and
-    └── example.configuration            │ its pom lives here.
-    │   ├── pom.xml
-    │   └── .project
-    ├── example.update                   │ The update site that publishes the
-    │   ├── category.xml                 │ that is configured to publish the
-    │   ├── pom.xml                      │ feature.
-    │   └── .project
-    └── pom.xml
+```diff
+
+ .
++├── bundles
+-│   ├── example.plugin1                    │ In the bundles directory lie
+-│   │   ├── bin                            │ the plugins. The plugins are
+-│   │   │   └── example                    │ smallest coherent unit in the
+-│   │   │       └── plugin1                │ eclipse universe.
+-│   │   │           └── Activator.class
+-│   │   ├── build.properties
+-│   │   ├── .classpath
+!│   │   ├── META-INF                       │ In pomless builds, the
+!│   │   │   └── MANIFEST.MF                │ MANIFEST file regulates the
+!│   │   │                                  │ maven build properties. (no pom)
+-│   │   ├── .project
+-│   │   ├── .settings
+-│   │   │   └── org.eclipse.jdt.core.prefs
+-│   │   └── src
+-│   │       └── example
+-│   │           └── plugin1
+-│   │               └── Activator.java
++│   └── pom.xml                          │ pom only in the bundles folder
+ │
+ │
++├── features                             │ features are the smallest deployable
+-│   ├── example.feature                  │ units, consisting of plugins.
+-│   │   ├── build.properties
+!│   │   ├── feature.xml                  │ Features are also pomless.
+-│   │   └── .project
++   └── pom.xml                          │ Pom file only in the root features.
+ │
+!├── .mvn                                 │ pomless  build setup gets
+!│   └── extensions.xml                   │ specified here.
+ │
++├── pom.xml                              │ There is a root project, with
++├── .project                             │ a root pom file.
+ ├── README.md
++└── releng                               │ The build config project, and the
++    │                                    │  update site project resides here
+-    ├── example.configuration
+-    │   ├── pom.xml
+-    │   └── .project
+#    ├── example.update                   │ The update site that publishes the
+#    │   ├── category.xml                 │ that is configured to publish the
+#    │   ├── pom.xml                      │ feature.
+#    │   └── .project
++    └── pom.xml
 
 ```
 
