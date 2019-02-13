@@ -3,6 +3,9 @@ package example.plugin1;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import com.dd.plist.XMLPropertyListParser;
+import com.dd.plist.UID;
+
 /**
  * The activator class controls the plug-in life cycle
  */
@@ -18,6 +21,7 @@ public class Activator extends AbstractUIPlugin {
 	 * The constructor
 	 */
 	public Activator() {
+	    XMLPropertyListParser ns = new XMLPropertyListParser();
 	}
 
 	/*

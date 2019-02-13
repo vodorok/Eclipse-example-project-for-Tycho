@@ -22,7 +22,7 @@ The goals of this project:
 * Easy integration with CI (Travis).
 * Update-site.
 
-The initial structure of the project is closely following the [vogella][vogella link] example project structure, but without a product project. Using the feature level is sufficient for eclipse plugins for publishing them on update sites.
+The initial structure of the project is closely following the [vogella][vogell_ link] example project structure, but without a product project. Using the feature level is sufficient for eclipse plugins for publishing them on update sites.
 
 ## Requirements
 
@@ -30,11 +30,42 @@ The initial structure of the project is closely following the [vogella][vogella 
 * Tycho 1.3.0
 * Eclipse NEON 3 (4.6.3) was used to generate the related projects.
 
-## Build
+## How To use
 
-type the following at the root of the project 
+### Building
 
-```mvn clean verify```
+Type the following at the root of the project.
+
+__before the build:__
+
+```
+
+cd ./mavendeps
+
+mvn p2:site
+mvn jetty:run (you should start in the background.)
+
+```
+_wait for the site to generate and the server to start._
+
+__Then__
+
+In the root of the project ```mvn clean verify```.
+
+### Adding a non OSGi dependency for the plugins.
+
+Extend the ```mavendeps/pom.xml``` 's ```<artifacts>``` section with a new artifact, as the following signature shows.
+
+```xml 
+
+<artifact><id>groupId:artifactId:version</id></artifact>
+
+```
+
+In this minimal example the ```DD Plist``` library was added. This could be it, but this lib has got a dependency on ```javax.xml.parsers```, so that also needs to be included, even though it's part of the standard JRE. For more information see [IBM's Guide][ibm_osgi_link] to OSGi.
+
+You are not completely hopeless on which dependency needs to be included. Eclipse will notify you when an added dependency couldn't be resolved, in a target definition with this warning:
+![alt text][target_error]
 
 ## Folder Structure
 
@@ -68,27 +99,27 @@ There is a brief explanation for every major part of the project.
 !├── mavendeps                              | 3rd party dependencies needed to
 !│   └── pom.xml                            | defined here.
  │
-+├── features                             │ features are the smallest deployable
--│   ├── example.feature                  │ units, consisting of plugins.
--│   │   ├── build.properties
-!│   │   ├── feature.xml                  │ Features are also pomless.
++├── features                               │ features are the smallest
+-│   ├── example.feature                    │ deployable units, consisting of
+-│   │   ├── build.properties               │ plugins.
+!│   │   ├── feature.xml                    │ Features are also pomless.
 -│   │   └── .project
-+   └── pom.xml                           │ Pom file only in the root features.
++│   └── pom.xml                            │ Pom file only in the features.
  │
-!├── .mvn                                 │ pomless  build setup gets
-!│   └── extensions.xml                   │ specified here.
+!├── .mvn                                   │ pomless  build setup gets
+!│   └── extensions.xml                     │ specified here.
  │
-+├── pom.xml                              │ There is a root project, with
-+├── .project                             │ a root pom file.
++├── pom.xml                                │ There is a root project, with
++├── .project                               │ a root pom file.
  ├── README.md
-+└── releng                               │ The build config project, and the
-+    │                                    │  update site project resides here
++└── releng                                 │ The build config project, and the
++    │                                      │  update site project resides here
 -    ├── example.configuration
 -    │   ├── pom.xml
 -    │   └── .project
-#    ├── example.update                   │ The update site that publishes the
-#    │   ├── category.xml                 │ that is configured to publish the
-#    │   ├── pom.xml                      │ feature.
+#    ├── example.update                     │ The update site that publishes the
+#    │   ├── category.xml                   │ that is configured to publish the
+#    │   ├── pom.xml                        │ feature.
 #    │   └── .project
 +    └── pom.xml
 
@@ -96,10 +127,14 @@ There is a brief explanation for every major part of the project.
 
 ## Useful links for better understanding the used concepts
 
-* [The Project structure][vogella link]
-* [The plugin that creates the local update site][mvn p2 link]
+* [The Project structure][vogella_link]
+* [The plugin that creates the local update site][mvn_p2_link]
+* [OSGi guidance][ibm_osgi_link]
 
 
 
-[vogella link]: http://www.vogella.com/tutorials/EclipseTycho/article.html
-[mvn p2 link]: https://github.com/reficio/p2-maven-plugin
+[vogella_link]: http://www.vogella.com/tutorials/EclipseTycho/article.html
+[mvn_p2_link]: https://github.com/reficio/p2-maven-plugin
+[ibm_osgi_link]: https://www.ibm.com/support/knowledgecenter/en/SSGMCP_5.5.0/applications/developing/java/dfhpj_osgiframework.html
+
+[target_error]: ./docs/img/target_def_error.png

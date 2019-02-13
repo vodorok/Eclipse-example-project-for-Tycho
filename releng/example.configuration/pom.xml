@@ -17,7 +17,11 @@
    <url>${eclipse-repo.url}</url>
    <layout>p2</layout>
   </repository>
-
+  <repository>
+   <id>mavendeps</id>
+   <url>http://localhost:8080/site</url>
+   <layout>p2</layout>
+  </repository>
  </repositories>
 
  <build>
