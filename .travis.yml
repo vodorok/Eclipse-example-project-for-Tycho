@@ -1,15 +1,14 @@
 dist: trusty
+install: true
 language: java
 jdk:
     - oraclejdk8
-cache:
-    directories:
-        - $HOME/.m2
 
 before_script:
     - cd ./mavendeps
     - mvn p2:site
-    - mvn jetty:run&
+    - mvn jetty:run &
+    - sleep 10
     - cd ..
 
 script: mvn clean verify
