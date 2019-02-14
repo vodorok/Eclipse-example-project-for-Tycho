@@ -3,5 +3,8 @@
    <feature url="features/example.feature_1.0.0.qualifier.jar" id="example.feature" version="1.0.0.qualifier">
       <category name="example"/>
    </feature>
+   <bundle id="com.googlecode.plist.dd-plist" version="1.21.0">
+      <category name="example"/>
+   </bundle>
    <category-def name="example" label="Example"/>
 </site>

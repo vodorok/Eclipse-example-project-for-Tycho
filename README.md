@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/Vodorok/Eclipse-example-project-for-Tycho.svg?branch=master)](https://travis-ci.org/Vodorok/Eclipse-example-project-for-Tycho)
 
-## Preface 
+## Preface
 
-__This is a work in progress project, treat it accordingly, suggestions, contributions, and corrects are very welcome.__
+__This is a work in progress project, treat it accordingly, suggestions, contributions, and corrections are very welcome.__
 
 The project feature and plugin words are overloaded in this context, but I'll try to be as clear as I can get.
 
@@ -38,7 +38,7 @@ Type the following at the root of the project.
 
 __before the build:__
 
-```
+```shell
 
 cd ./mavendeps
 
@@ -66,6 +66,11 @@ In this minimal example the ```DD Plist``` library was added. This could be it, 
 
 You are not completely hopeless on which dependency needs to be included. Eclipse will notify you when an added dependency couldn't be resolved, in a target definition with this warning:
 ![alt text][target_error]
+
+__BUT__
+
+This is not everything. Your plugin will be buildable, and the IDE will see your dependencies. but for deploying your plugin, you should also specify your dependency in the update sites ```category.xml```. With this way the dependency will be included at compile time to the update-site, and therefore the mavendeps p2 site is not needed for deploying your plugin.
+
 
 ## Folder Structure
 
