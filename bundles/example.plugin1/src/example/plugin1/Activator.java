@@ -4,7 +4,6 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import com.dd.plist.XMLPropertyListParser;
-import com.dd.plist.UID;
 
 /**
  * The activator class controls the plug-in life cycle

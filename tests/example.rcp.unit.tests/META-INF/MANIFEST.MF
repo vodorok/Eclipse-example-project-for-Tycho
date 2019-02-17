@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tests
+Bundle-SymbolicName: example.rcp.unit.tests
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Vodorok
+Fragment-Host: example.plugin1;bundle-version="1.0.0"
+Automatic-Module-Name: example.rcp.unit.tests
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.junit

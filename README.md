@@ -22,7 +22,7 @@ The goals of this project:
 * Easy integration with CI (Travis).
 * Update-site.
 
-The initial structure of the project is closely following the [vogella][vogell_ link] example project structure, but without a product project. Using the feature level is sufficient for eclipse plugins for publishing them on update sites.
+The initial structure of the project is closely following the [vogella][vogella_link] example project structure, but without a product project. Using the feature level is sufficient for eclipse plugins for publishing them on update sites.
 
 ## Requirements
 
@@ -46,7 +46,7 @@ mvn p2:site
 mvn jetty:run (you should start in the background.)
 
 ```
-_wait for the site to generate and the server to start._
+_Wait for the site to generate and the server to start. After the first successful build, the non OSGi dependencies got included in my local .m2 repo._
 
 __Then__
 
@@ -64,69 +64,86 @@ Extend the ```mavendeps/pom.xml``` 's ```<artifacts>``` section with a new artif
 
 In this minimal example the ```DD Plist``` library was added. This could be it, but this lib has got a dependency on ```javax.xml.parsers```, so that also needs to be included, even though it's part of the standard JRE. For more information see [IBM's Guide][ibm_osgi_link] to OSGi.
 
-You are not completely hopeless on which dependency needs to be included. Eclipse will notify you when an added dependency couldn't be resolved, in a target definition with this warning:
-![alt text][target_error]
+You are not completely hopeless on which dependency needs to be included in your ```mavendeps``` local repo. Eclipse will notify you when an added dependency couldn't be resolved, in a target definition with this warning:
+![unresolved dependency][target_error]
 
 __BUT__
 
-This is not everything. Your plugin will be buildable, and the IDE will see your dependencies. but for deploying your plugin, you should also specify your dependency in the update sites ```category.xml```. With this way the dependency will be included at compile time to the update-site, and therefore the mavendeps p2 site is not needed for deploying your plugin.
+This is not everything. Your plugin will be buildable, and the IDE will see your dependencies. but for deploying your plugin, you should also include your dependency in the feature that your plugin is contained in.
 
+### Tests
+
+Make sure that the name of your test projects ends with ```.tests``` . With pomless builds, tycho only considers projects with this signature as valid test projects and run the surefire goal for them.
+
+### What they didn't tell you
+
+* Don't include x86 goals with newer eclipse/tycho? because all hell breaks lose when you try to compile anything complicated than the sample plugin with an activator. 32bit targets were dropped, but no indication is given when you use those targets.
 
 ## Folder Structure
 
 There is a brief explanation for every major part of the project.
 
-(Excuse for the makeshift diff style color coding.)
+```
 
-```diff
-
- .
-+├── bundles
--│   ├── example.plugin1                    │ In the bundles directory lie
--│   │   ├── bin                            │ the plugins. The plugins are
--│   │   │   └── example                    │ smallest coherent unit in the
--│   │   │       └── plugin1                │ eclipse universe.
--│   │   │           └── Activator.class
--│   │   ├── build.properties
--│   │   ├── .classpath
-!│   │   ├── META-INF                       │ In pomless builds, the
-!│   │   │   └── MANIFEST.MF                │ MANIFEST file regulates the
-!│   │   │                                  │ maven build properties. (no pom)
--│   │   ├── .project
--│   │   ├── .settings
--│   │   │   └── org.eclipse.jdt.core.prefs
--│   │   └── src
--│   │       └── example
--│   │           └── plugin1
--│   │               └── Activator.java
-+│   └── pom.xml                            │ pom only in the bundles folder
- │
-!├── mavendeps                              | 3rd party dependencies needed to
-!│   └── pom.xml                            | defined here.
- │
-+├── features                               │ features are the smallest
--│   ├── example.feature                    │ deployable units, consisting of
--│   │   ├── build.properties               │ plugins.
-!│   │   ├── feature.xml                    │ Features are also pomless.
--│   │   └── .project
-+│   └── pom.xml                            │ Pom file only in the features.
- │
-!├── .mvn                                   │ pomless  build setup gets
-!│   └── extensions.xml                     │ specified here.
- │
-+├── pom.xml                                │ There is a root project, with
-+├── .project                               │ a root pom file.
- ├── README.md
-+└── releng                                 │ The build config project, and the
-+    │                                      │  update site project resides here
--    ├── example.configuration
--    │   ├── pom.xml
--    │   └── .project
-#    ├── example.update                     │ The update site that publishes the
-#    │   ├── category.xml                   │ that is configured to publish the
-#    │   ├── pom.xml                        │ feature.
-#    │   └── .project
-+    └── pom.xml
+.
+├── bundles                                 │ In the bundles directory lie
+│   ├── example.plugin1                     │ the plugins. The plugins ar 
+│   │   │                                   │ smallest coherent unit in the
+│   │   │                                   │ eclipse universe.
+│   │   ├── build.properties
+│   │   ├── .classpath
+│   │   ├── META-INF                        │ In pomless builds, the
+│   │   │   └── MANIFEST.MF                 │ MANIFEST file regulates the
+│   │   │                                   │ maven build properties. (no pom)
+│   │   ├── .project
+│   │   ├── .settings
+│   │   │   └── org.eclipse.jdt.core.prefs
+│   │   └── src
+│   │
+│   └── pom.xml                             │ pom only in the bundles folder
+│
+├── mavendeps                               | 3rd party dependencies needed to
+│   └── pom.xml                             | defined here.
+│
+├── features                                │ features are the smallest
+│   ├── example.feature                     │ deployable units, consisting of
+│   │   ├── build.properties                │ plugins.
+│   │   ├── feature.xml                     │ Features are also pomless.
+│   │   └── .project
+│   │
+│   └── pom.xml                             │ Pom file only in the features.
+│
+├── .mvn                                    │ pomless  build setup gets
+│   └── extensions.xml                      │ specified here.
+│
+├── pom.xml                                 │ There is a root project, with
+├── .project                                │ a root pom file.
+├── README.md
+│
+├── releng                                  │ The build config project, and the
+│   │                                       │  update site project resides here
+│   ├── example.configuration
+│   │   ├── pom.xml
+│   │   └── .project
+│   ├── example.update                      │ The update site that publishes the
+│   │   ├── category.xml                    │ that is configured to publish the
+│   │   ├── pom.xml                         │ feature.
+│   │   └── .project
+│   │
+│   └── pom.xml
+│
+├── tests
+│   ├── example.rcp.unit.tests              | Unit test are fragment projects to
+│   │   ├── build.properties                | the bundles they test. In this
+│   │   ├── META-INF                        | case the host is plugin1.
+│   │   │   └── MANIFEST.MF
+│   │   ├── .project
+│   │   ├── .settings
+│   │   │   └── org.eclipse.jdt.core.prefs
+│   │   └── src
+│   │
+│   └── pom.xml
+└── .travis.yml
 
 ```
 
