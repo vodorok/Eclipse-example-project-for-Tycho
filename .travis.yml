@@ -4,10 +4,14 @@ language: java
 jdk:
     - oraclejdk8
 
-services:
-    - xvfb
+env: DISPLAY=:99.0
+
+before_install:
+    - sudo apt-get install at-spi2-core
 
 before_script:
+    - sh -e /etc/init.d/xvfb start
+    - sleep 10 # give xvfb some time to start
     - cd ./mavendeps
     - mvn p2:site
     - mvn jetty:run &
@@ -15,3 +19,7 @@ before_script:
     - cd ..
 
 script: mvn clean verify
+
+after_failure:
+    - cat /home/travis/build/Vodorok/Eclipse-example-project-for-Tycho/tests/example.rcp.it.tests/target/work/data/.metadata/.log
+    - cat /home/travis/build/Vodorok/Eclipse-example-project-for-Tycho/tests/example.rcp.it.tests/target/surefire-reports/*
