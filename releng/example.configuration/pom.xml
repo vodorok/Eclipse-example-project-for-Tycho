@@ -8,21 +8,7 @@
     <properties>
         <tycho.version>1.3.0</tycho.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <eclipse-repo.url>https://download.eclipse.org/releases/2019-03</eclipse-repo.url>
-</properties>
-
-    <repositories>
-        <repository>
-            <id>eclipse-release</id>
-            <url>${eclipse-repo.url}</url>
-            <layout>p2</layout>
-        </repository>
-        <repository>
-            <id>mavendeps</id>
-            <url>http://localhost:8080/site</url>
-            <layout>p2</layout>
-        </repository>
-    </repositories>
+    </properties>
 
     <build>
         <plugins>
@@ -52,6 +38,22 @@
                 <artifactId>target-platform-configuration</artifactId>
                 <version>${tycho.version}</version>
                 <configuration>
+                    <target>
+                        <artifact>
+                            <groupId>example</groupId>
+                            <artifactId>example.target</artifactId>
+                            <version>1.0.0-SNAPSHOT</version>
+                        </artifact>
+                    </target>
+                    <dependency-resolution>
+                        <extraRequirements>
+                            <requirement>
+                                <type>eclipse-plugin</type>
+                                <id>org.eclipse.equinox.event</id>
+                                <versionRange>0.0.0</versionRange>
+                            </requirement>
+                        </extraRequirements>
+                    </dependency-resolution>
                     <environments>
                         <environment>
                             <os>linux</os>

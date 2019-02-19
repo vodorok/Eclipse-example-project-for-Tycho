@@ -13,5 +13,6 @@
 
     <modules>
         <module>example.update</module>
+        <module>example.target</module>
     </modules>
 </project>

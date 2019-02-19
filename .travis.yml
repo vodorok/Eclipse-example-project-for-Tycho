@@ -4,6 +4,9 @@ language: java
 jdk:
     - oraclejdk8
 
+services:
+    - xvfb
+
 before_script:
     - cd ./mavendeps
     - mvn p2:site

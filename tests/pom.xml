@@ -13,5 +13,6 @@
 
     <modules>
         <module>example.rcp.unit.tests</module>
+        <module>example.rcp.it.tests</module>
     </modules>
 </project>
