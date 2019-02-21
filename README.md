@@ -88,9 +88,17 @@ Unit test are defined under ```./tests/example.rcp.unit.tests```. The fragment h
 
 These kind of test uses SWTBot to conduct the test. There was a useful configuration information about the vogella tests, [here][vogella_correction_link] (Change Eclipse RCP to Eclipse SDK in target platform, and for me the Hamcrest Matchers import couldn't be resolved, got fixed as well).
 
+When running from CLI there were inconsistency in the configuration of the eclipse that SWTBot starts. For the sake of understanding it's configured to include CDT dependencies for a CDT environment.
+
+For customization of the behavior, add plugins as dependency to the it.tests project.
+
 ### Target platform
 
-For a consistent user experience a custom target platform was created. Include this in your eclipse target platform when you first import your project.
+For a consistent user experience a custom target platform was created. Include this in your eclipse target platform when you first import your project. Then select this as an active target under
+
+```Window -> Preferences -> PLug-in Development -> Target Platform```
+
+The resolution of the Target Platform might take some time, but this should only occur on modification or the explicit reloading of the Target Platform. The CDT and TM Terminal targets or dependencies only included because of SWTBot customization.
 
 ### What they didn't tell you
 
